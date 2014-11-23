@@ -3,32 +3,8 @@
 gosub *syokika		//変数初期化
 gosub *s_load		// 設定読み込み
 gosub *window_ichi	// 窓位置設定
+gosub *kidou_zenmen // 起動時の前画面
 goto *main
-
-
-
-// ウィンドウのサイズと位置
-*window_ichi
-	// screenx = 0
-	// screeny = 0
-
-
-	if ichi_kioku = 1 : goto *ichi_f
-	if ichi_kioku = 0 : goto *ichi_nf
-
-
-*ichi_f
-	screen 0, 155, 330, , screenx, screeny
-	return
-
-
-*ichi_nf
-	screen 0, 155, 330, , 0, 0
-	return 
-
-
-	stop
-
 
 
 
@@ -45,7 +21,6 @@ goto *main
 	c9=0
 	c10=0
 	c11=0
-	c12=0
 
 	cc1=0
 	cc2=0
@@ -58,10 +33,36 @@ goto *main
 	cc9=0
 	cc10=0
 	cc11=0
-	cc12=0
+
 
 	return
 
+// ウィンドウのサイズと位置
+*window_ichi
+
+	if ichi_kioku = 0 {
+						screen 0, 155, 330, , 0, 0
+						return
+	}
+	else {
+						screen 0, 155, 330, , screenx, screeny
+						return
+	}
+
+
+// 起動時の前画面
+*kidou_zenmen
+	if zenmen = 0 {
+					return
+	}
+	else {
+					gsel 0, 2
+					return
+	}
+
+//　*kidou_zenmen_on
+// 	gsel 0, 2
+// 	return
 
 
 
@@ -94,9 +95,9 @@ goto *main
 	chkbox "充電" , c8
 	font msgothic, 12
 	mes "---- MG ----"
-	chkbox "全快" , c10
-	chkbox "Madness" , c11
-	chkbox "Psi回復" , c12
+	chkbox "全快" , c9
+	chkbox "Madness" , c10
+	chkbox "Psi回復" , c11
 
 
 	// ボタン
@@ -112,95 +113,577 @@ goto *main
 	pos 105, ginfo_cy-24
 	button "Quit", *quit
 
+	pos 110, 5
+	objsize 38, 24
+	button "MOD", *mod
 
-//	pos 90, ginfo_cy-24
-//	button "Save", *save
 
 
 
-	// 不明色
-	objsize 
+	objsize
 	pos 90, 15
 	font msgothic, 12
-	mes "不明色"
+//	mes "不明色"
+
+
 
 	boxpos1 = 90
 	boxpos2 = 35
 	boxpos3 = 105
 	boxpos4 = 50
 
-	//黒
-	boxf boxpos1, boxpos2, boxpos3, boxpos4
+	haba = 23 // 表示幅
+
+	//黒枠
+	color 0, 0, 0
+//	boxpos2 = boxpos2 + 25
+//	boxpos4 = boxpos4 + 25
+	boxf boxpos1, boxpos2, boxpos3, boxpos4	
 
 	//白
-	boxpos2 = boxpos2 + 25
-	boxpos4 = boxpos4 + 25
+	boxpos_waku1 = boxpos1 + 1
+	boxpos_waku2 = boxpos2 + 1
+	boxpos_waku3 = boxpos3 - 1
+	boxpos_waku4 = boxpos4 - 1
 	color 255, 255, 255
-	boxf boxpos1, boxpos2, boxpos3, boxpos4
+	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
 
-	//白の黒枠
+	//黒枠
 	color 0, 0, 0
-	line  90, 60, 90, 75
-	line  89, 60, 105, 60
-	line  106, 75, 90, 75
-	line  105, 60, 105, 75
-
-	//赤
-	boxpos2 = boxpos2 + 25
-	boxpos4 = boxpos4 + 25
-	color 255, 0, 0
-	boxf boxpos1, boxpos2, boxpos3, boxpos4
-
-	//緑
-	boxpos2 = boxpos2 + 25
-	boxpos4 = boxpos4 + 25
-	color 0, 255, 0
-	boxf boxpos1, boxpos2, boxpos3, boxpos4
-
-	//オレンジ
-	boxpos2 = boxpos2 + 25
-	boxpos4 = boxpos4 + 25
-	color 255, 128, 0
-	boxf boxpos1, boxpos2, boxpos3, boxpos4
+	boxpos2 = boxpos2 + haba
+	boxpos4 = boxpos4 + haba
+	boxf boxpos1, boxpos2, boxpos3, boxpos4	
 
 	//黄色
-	boxpos2 = boxpos2 + 25
-	boxpos4 = boxpos4 + 25
+	boxpos_waku1 = boxpos1 + 1
+	boxpos_waku2 = boxpos2 + 1
+	boxpos_waku3 = boxpos3 - 1
+	boxpos_waku4 = boxpos4 - 1
 	color 255, 255, 0
+	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
+
+	//黒枠
+	color 0, 0, 0
+	boxpos2 = boxpos2 + haba
+	boxpos4 = boxpos4 + haba
+	boxf boxpos1, boxpos2, boxpos3, boxpos4	
+
+	//緑
+	boxpos_waku1 = boxpos1 + 1
+	boxpos_waku2 = boxpos2 + 1
+	boxpos_waku3 = boxpos3 - 1
+	boxpos_waku4 = boxpos4 - 1
+	color 0, 255, 0
+	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
+
+	//黒枠
+	color 0, 0, 0
+	boxpos2 = boxpos2 + haba
+	boxpos4 = boxpos4 + haba
+	boxf boxpos1, boxpos2, boxpos3, boxpos4	
+
+	//オレンジ
+	boxpos_waku1 = boxpos1 + 1
+	boxpos_waku2 = boxpos2 + 1
+	boxpos_waku3 = boxpos3 - 1
+	boxpos_waku4 = boxpos4 - 1
+	color 255, 128, 0
+	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
+
+
+	//黒枠
+	color 0, 0, 0
+	boxpos2 = boxpos2 + haba
+	boxpos4 = boxpos4 + haba
+	boxf boxpos1, boxpos2, boxpos3, boxpos4	
+
+	//赤
+	boxpos_waku1 = boxpos1 + 1
+	boxpos_waku2 = boxpos2 + 1
+	boxpos_waku3 = boxpos3 - 1
+	boxpos_waku4 = boxpos4 - 1
+	color 255, 0, 0
+	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
+
+
+
+	//黒枠
+	color 0, 0, 0
+	boxpos2 = boxpos2 + haba
+	boxpos4 = boxpos4 + haba
+	boxf boxpos1, boxpos2, boxpos3, boxpos4	
+
+	//紫
+	boxpos_waku1 = boxpos1 + 1
+	boxpos_waku2 = boxpos2 + 1
+	boxpos_waku3 = boxpos3 - 1
+	boxpos_waku4 = boxpos4 - 1
+	color 128, 0, 128
+	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
+
+
+	//黒
+	color 0, 0, 0
+	boxpos2 = boxpos2 + haba
+	boxpos4 = boxpos4 + haba
 	boxf boxpos1, boxpos2, boxpos3, boxpos4
+
+
+	//黒枠
+	color 0, 0, 0
+	boxpos2 = boxpos2 + haba
+	boxpos4 = boxpos4 + haba
+	boxf boxpos1, boxpos2, boxpos3, boxpos4	
+
+	//
+	boxpos_waku1 = boxpos1 + 1
+	boxpos_waku2 = boxpos2 + 1
+	boxpos_waku3 = boxpos3 - 1
+	boxpos_waku4 = boxpos4 - 1
+	color 255, 255, 255
+	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
+
+	//黒枠
+	color 0, 0, 0
+	boxpos2 = boxpos2 + haba
+	boxpos4 = boxpos4 + haba
+	boxf boxpos1, boxpos2, boxpos3, boxpos4	
+
+	//
+	boxpos_waku1 = boxpos1 + 1
+	boxpos_waku2 = boxpos2 + 1
+	boxpos_waku3 = boxpos3 - 1
+	boxpos_waku4 = boxpos4 - 1
+	color 255, 255, 255
+	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
+
+	//黒枠
+	color 0, 0, 0
+	boxpos2 = boxpos2 + haba
+	boxpos4 = boxpos4 + haba
+	boxf boxpos1, boxpos2, boxpos3, boxpos4	
+
+	//
+	boxpos_waku1 = boxpos1 + 1
+	boxpos_waku2 = boxpos2 + 1
+	boxpos_waku3 = boxpos3 - 1
+	boxpos_waku4 = boxpos4 - 1
+	color 255, 255, 255
+	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
+
+	//黒枠
+	color 0, 0, 0
+	boxpos2 = boxpos2 + haba
+	boxpos4 = boxpos4 + haba
+	boxf boxpos1, boxpos2, boxpos3, boxpos4	
+
+	//
+	boxpos_waku1 = boxpos1 + 1
+	boxpos_waku2 = boxpos2 + 1
+	boxpos_waku3 = boxpos3 - 1
+	boxpos_waku4 = boxpos4 - 1
+	color 255, 255, 255
+	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
+
+
+
+
+
+
+
+
 
 
 	boxpos_c1 = 130
-	boxpos_c2 = 32
+	boxpos_c2 = 31
 
 	pos boxpos_c1, boxpos_c2
 	chkbox  "", cc1
 
-	boxpos_c2 = boxpos_c2 + 25
+	boxpos_c2 = boxpos_c2 + haba
 	pos boxpos_c1, boxpos_c2
 	chkbox  "", cc2
 
-	boxpos_c2 = boxpos_c2 + 25
+	boxpos_c2 = boxpos_c2 + haba
 	pos boxpos_c1, boxpos_c2
 	chkbox  "", cc3
 
-	boxpos_c2 = boxpos_c2 + 25
+	boxpos_c2 = boxpos_c2 + haba
 	pos boxpos_c1, boxpos_c2
 	chkbox  "", cc4
 
-	boxpos_c2 = boxpos_c2 + 25
+	boxpos_c2 = boxpos_c2 + haba
 	pos boxpos_c1, boxpos_c2
 	chkbox  "", cc5
 
-	boxpos_c2 = boxpos_c2 + 25
+	boxpos_c2 = boxpos_c2 + haba
 	pos boxpos_c1, boxpos_c2
 	chkbox  "", cc6
+
+	boxpos_c2 = boxpos_c2 + haba
+	pos boxpos_c1, boxpos_c2
+	chkbox  "", cc7
+
+	boxpos_c2 = boxpos_c2 + haba
+	pos boxpos_c1, boxpos_c2
+	chkbox  "", cc8
+
+	boxpos_c2 = boxpos_c2 + haba
+	pos boxpos_c1, boxpos_c2
+	chkbox  "", cc9
+
+	boxpos_c2 = boxpos_c2 + haba
+	pos boxpos_c1, boxpos_c2
+	chkbox  "", cc10
+
+	boxpos_c2 = boxpos_c2 + haba
+	pos boxpos_c1, boxpos_c2
+	chkbox  "", cc11
+
 
 	stop
 
 
 
 
+
+
+
+
+
+
+// ----------------------------------------
+// MOD
+*mod
+	// メインウィンドウの位置取得
+	screenx = ginfo_wx1 - 5
+	screeny = ginfo_wy1 - 5
+
+	gsel 0, -1	// メインウィンドウ消去
+	screen 2, 170, 370, , screenx, screeny
+
+
+	gsel 2, 2	// MODウィンドウを前画面へ
+	cls
+	syscolor 15:boxf	// オブジェクトの表面色で背景を塗りつぶす
+	color 0,0,0
+	title ""
+// タイトルバーの×ボタン
+	onexit goto *quit
+
+	haba = 20
+
+
+	//チェックボックス
+
+
+	pos 8, 35
+	font msgothic, 14
+	mes "武器MOD"
+
+	pos 5, 48
+	font msgothic, 13
+	mes " +  -"
+
+	boxpos_c1 = 8
+	boxpos_c2 = 30
+
+
+	boxpos_c2 = boxpos_c2 + haba + 8
+	pos boxpos_c1, boxpos_c2
+	objsize 20, 24
+	chkbox  "", wmp1
+
+	boxpos_mod1 = boxpos2_c1 + 28
+	pos boxpos_mod1, boxpos_c2
+	objsize 55,
+	chkbox  " Dam10", wmm1
+
+
+	boxpos_c2 = boxpos_c2 + haba
+	pos boxpos_c1, boxpos_c2
+	objsize 20, 24
+	chkbox  "", wmp2
+
+	boxpos_mod1 = boxpos2_c1 + 28
+	pos boxpos_mod1, boxpos_c2
+	objsize 55,
+	chkbox  " Pen 5", wmm2
+
+
+	boxpos_c2 = boxpos_c2 + haba
+	pos boxpos_c1, boxpos_c2
+	objsize 20, 24
+	chkbox  "", wmp3
+
+	boxpos_mod1 = boxpos2_c1 + 28
+	pos boxpos_mod1, boxpos_c2
+	objsize 55,
+	chkbox  " Acc10", wmm3
+
+
+	boxpos_c2 = boxpos_c2 + haba
+	pos boxpos_c1, boxpos_c2
+	objsize 20, 24
+	chkbox  "", wmp4
+
+	boxpos_mod1 = boxpos2_c1 + 28
+	pos boxpos_mod1, boxpos_c2
+	objsize 55,
+	chkbox  " Dur20", wmm4
+
+
+	boxpos_c2 = boxpos_c2 + haba
+	pos boxpos_c1, boxpos_c2
+	objsize 20, 24
+	chkbox  "", wmp5
+
+	boxpos_mod1 = boxpos2_c1 + 28
+	pos boxpos_mod1, boxpos_c2
+	objsize 55,
+	chkbox  " Dur50", wmm5
+
+
+	boxpos_c2 = boxpos_c2 + haba + 10
+	pos boxpos_c1, boxpos_c2
+	font msgothic, 12
+	mes "--- MG ---"
+
+
+	boxpos_c2 = boxpos_c2 + haba
+	pos boxpos_c1, boxpos_c2
+	objsize 20, 24
+	chkbox  "", wmp6
+
+	boxpos_mod1 = boxpos2_c1 + 28
+	pos boxpos_mod1, boxpos_c2
+	objsize 55,
+	chkbox  " 火花", wmm6
+
+
+	boxpos_c2 = boxpos_c2 + haba
+	pos boxpos_c1, boxpos_c2
+	objsize 20, 24
+	chkbox  "", wmp7
+
+	boxpos_mod1 = boxpos2_c1 + 28
+	pos boxpos_mod1, boxpos_c2
+	objsize 55,
+	chkbox  " モチベ", wmm7
+
+
+// 右側
+
+	pos 92, 35
+	font msgothic, 14
+	mes "鎧MOD"
+
+	pos 88, 48
+	font msgothic, 13
+	mes " +  -"
+
+	boxpos_migi_c1 = 92
+	boxpos_migi_c2 = 38
+
+
+	boxpos_migi_c2 = boxpos_migi_c2 + haba
+	pos boxpos_migi_c1, boxpos_migi_c2
+	objsize 20, 24
+	chkbox  "", wmp8
+
+	boxpos_migi_c3 = boxpos_migi_c1 + 20
+	pos boxpos_migi_c3, boxpos_migi_c2
+	objsize ,
+	chkbox  " Arm10", wmm8
+
+
+	boxpos_migi_c2 = boxpos_migi_c2 + haba
+	pos boxpos_migi_c1, boxpos_migi_c2
+	objsize 20, 24
+	chkbox  "", wmp9
+
+	boxpos_migi_c3 = boxpos_migi_c1 + 20
+	pos boxpos_migi_c3, boxpos_migi_c2
+	objsize ,
+	chkbox  " Mig10", wmm9
+
+
+	boxpos_migi_c2 = boxpos_migi_c2 + haba
+	pos boxpos_migi_c1, boxpos_migi_c2
+	objsize 20, 24
+	chkbox  "", wmp10
+
+	boxpos_migi_c3 = boxpos_migi_c1 + 20
+	pos boxpos_migi_c3, boxpos_migi_c2
+	objsize ,
+	chkbox  " Fin10", wmm10
+
+
+	boxpos_migi_c2 = boxpos_migi_c2 + haba
+	pos boxpos_migi_c1, boxpos_migi_c2
+	objsize 20, 24
+	chkbox  "", wmp11
+
+	boxpos_migi_c3 = boxpos_migi_c1 + 20
+	pos boxpos_migi_c3, boxpos_migi_c2
+	objsize ,
+	chkbox  " dur20", wmm11
+
+
+	boxpos_migi_c2 = boxpos_migi_c2 + haba
+	pos boxpos_migi_c1, boxpos_migi_c2
+	objsize 20, 24
+	chkbox  "", wmp12
+
+	boxpos_migi_c3 = boxpos_migi_c1 + 20
+	pos boxpos_migi_c3, boxpos_migi_c2
+	objsize ,
+	chkbox  " dur50", wmm12
+
+
+	boxpos_migi_c2 = boxpos_migi_c2 + haba
+	pos boxpos_migi_c1, boxpos_migi_c2
+	objsize 20, 24
+	chkbox  "", wmp13
+
+	boxpos_migi_c3 = boxpos_migi_c1 + 20
+	pos boxpos_migi_c3, boxpos_migi_c2
+	objsize ,
+	chkbox  " Regen", wmm13
+
+
+	boxpos_migi_c2 = boxpos_migi_c2 + haba
+	pos boxpos_migi_c1, boxpos_migi_c2
+	objsize 20, 24
+	chkbox  "", wmp14
+
+	boxpos_migi_c3 = boxpos_migi_c1 + 20
+	pos boxpos_migi_c3, boxpos_migi_c2
+	objsize ,
+	chkbox  " Menta", wmm14
+
+
+	// Serum
+	pos 92, 205
+	font msgothic, 14
+	mes "Serum"
+
+	pos 88, 216
+	font msgothic, 13
+	mes " +  -"
+
+	boxpos_migi_c1 = 92
+	boxpos_migi_c2 = 205
+
+
+	boxpos_migi_c2 = boxpos_migi_c2 + haba
+	pos boxpos_migi_c1, boxpos_migi_c2
+	objsize 20, 24
+	chkbox  "", wmp15
+
+	boxpos_migi_c3 = boxpos_migi_c1 + 20
+	pos boxpos_migi_c3, boxpos_migi_c2
+	objsize ,
+	chkbox  " Might", wmm15
+
+
+	boxpos_migi_c2 = boxpos_migi_c2 + haba
+	pos boxpos_migi_c1, boxpos_migi_c2
+	objsize 20, 24
+	chkbox  "", wmp16
+
+	boxpos_migi_c3 = boxpos_migi_c1 + 20
+	pos boxpos_migi_c3, boxpos_migi_c2
+	objsize ,
+	chkbox  " Fines", wmm16
+
+
+	boxpos_migi_c2 = boxpos_migi_c2 + haba
+	pos boxpos_migi_c1, boxpos_migi_c2
+	objsize 20, 24
+	chkbox  "", wmp17
+
+	boxpos_migi_c3 = boxpos_migi_c1 + 20
+	pos boxpos_migi_c3, boxpos_migi_c2
+	objsize ,
+	chkbox  " Brain", wmm17
+
+
+	boxpos_migi_c2 = boxpos_migi_c2 + haba
+	pos boxpos_migi_c1, boxpos_migi_c2
+	objsize 20, 24
+	chkbox  "", wmp18
+
+	boxpos_migi_c3 = boxpos_migi_c1 + 20
+	pos boxpos_migi_c3, boxpos_migi_c2
+	objsize ,
+	chkbox  " XP HP", wmm18
+
+
+	boxpos_migi_c2 = boxpos_migi_c2 + haba +5
+	pos boxpos_migi_c1, boxpos_migi_c2
+	font msgothic, 12
+	mes "--- MG ---"
+
+
+	//boxpos_migi_c2 = boxpos_migi_c2 + haba
+	boxpos_migi_c2 = boxpos_migi_c2 + 12
+	pos boxpos_migi_c1, boxpos_migi_c2
+	objsize 20, 24
+	chkbox  "", wmp19
+
+	boxpos_migi_c3 = boxpos_migi_c1 + 20
+	pos boxpos_migi_c3, boxpos_migi_c2
+	objsize ,
+	chkbox  " Psi P", wmm19
+
+
+	boxpos_migi_c2 = boxpos_migi_c2 + haba
+	pos boxpos_migi_c1, boxpos_migi_c2
+	objsize 20, 24
+	chkbox  "", wmp20
+
+	boxpos_migi_c3 = boxpos_migi_c1 + 20
+	pos boxpos_migi_c3, boxpos_migi_c2
+	objsize ,
+	chkbox  " Psi L", wmm20
+
+
+
+	// ボタン
+
+	mes "" // 改行代わり
+	objsize 43,24
+
+
+	pos 110, 5
+	objsize 52,24
+	button "Main", *main_button
+
+
+	stop
+
+
+*main_button 
+	// メインウィンドウの位置取得
+	screenx = ginfo_wx1 + 5
+	screeny = ginfo_wy1 + 5
+
+	gsel 2, -1	// MODウィンドウ消去
+
+	gosub *window_ichi
+	goto *main
+
+
+
+
+
+
+
+
+
+
+// ----------------------------------------
 // リセットボタン
 *reset
 	c1=0
@@ -214,7 +697,6 @@ goto *main
 	c9=0
 	c10=0
 	c11=0
-	c12=0
 
 	cc1=0
 	cc2=0
@@ -227,7 +709,49 @@ goto *main
 	cc9=0
 	cc10=0
 	cc11=0
-	cc12=0
+
+	wmp1 = 0
+	wmm1 = 0
+	wmp2 = 0
+	wmm2 = 0
+	wmp3 = 0
+	wmm3 = 0
+	wmp4 = 0
+	wmm4 = 0
+	wmp5 = 0
+	wmm5 = 0
+	wmp6 = 0
+	wmm6 = 0
+	wmp7 = 0
+	wmm7 = 0
+
+	wmp8 = 0
+	wmm8 = 0
+	wmp9 = 0
+	wmm9 = 0
+	wmp10 = 0
+	wmm10 = 0
+	wmp11 = 0
+	wmm11 = 0
+	wmp12 = 0
+	wmm12 = 0
+	wmp13 = 0
+	wmm13 = 0
+	wmp14 = 0
+	wmm14 = 0
+
+	wmp15 = 0
+	wmm15 = 0
+	wmp16 = 0
+	wmm16 = 0
+	wmp17 = 0
+	wmm17 = 0
+	wmp18 = 0
+	wmm18 = 0
+	wmp19 = 0
+	wmm19 = 0
+	wmp20 = 0
+	wmm20 = 0
 
 	goto *main
 
@@ -235,11 +759,16 @@ goto *main
 
 
 // ----------------------------------------
-
+// 設定
 *config
+
+	// メインウィンドウの位置取得
+	screenx = ginfo_wx1 - 5
+	screeny = ginfo_wy1 - 5
+
 	gsel 0, -1	// メインウィンドウ消去
 
-	screen 1, 135, 160
+	screen 1, 135, 160, , screenx, screeny
 	gsel 1, 2	// 設定ウィンドウを前画面へ
 	cls
 	syscolor 15:boxf	// オブジェクトの表面色で背景を塗りつぶす
@@ -258,7 +787,7 @@ goto *main
 	chkbox "終了時の位置を記憶" , ichi_kioku
 
 	mes ""
-	mes "        Ver 0.2"
+	mes "        Ver 0.3"
 	mes "     @linuxman6"
 
 
@@ -273,18 +802,16 @@ goto *main
 
 *config_ok
 	gsel 1, -1	// 設定ウィンドウ消去
-//	gsel 0, 2	// メインウィンドウ表示
 
-	if 0 = zenmen : goto *zenmen_off
-	if 1 = zenmen : goto *zenmen_on
+	if 0 = zenmen {
+					gsel 0, 1
+					goto *main
+	}
+	else {
+					gsel 0, 2
+					goto *main
+	}
 
-*zenmen_on
-	gsel 0, 2
-	goto *main
-
-*zenmen_off
-	gsel 0, 1
-	goto *main
 
 
 
@@ -307,7 +834,7 @@ goto *main
 	screeny = int(screeny)
 
 	// ウィンドウ位置の復元
-	noteget ichi_kioku, 27
+	noteget ichi_kioku, 25
 	ichi_kioku = int(ichi_kioku)
 
 	// トラップ
@@ -322,7 +849,6 @@ goto *main
 	noteget c9, 11
 	noteget c10, 12
 	noteget c11, 13
-	noteget c12, 14
 
 	c1 = int(c1)
 	c2 = int(c2)
@@ -335,7 +861,7 @@ goto *main
 	c9 = int(c9)
 	c10 = int(c10)
 	c11 = int(c11)
-	c12 = int(c12)
+
 
 	// 謎色
 	noteget cc1, 14
@@ -361,6 +887,104 @@ goto *main
 	cc9 = int(cc9)
 	cc10 = int(cc10)
 	cc11 = int(cc11)
+
+	// 武器
+	noteget wmp1, 26
+	noteget wmm1, 27
+	noteget wmp2, 28
+	noteget wmm2, 29
+	noteget wmp3, 30
+	noteget wmm3, 31
+	noteget wmp4, 32
+	noteget wmm4, 33
+	noteget wmp5, 34
+	noteget wmm5, 35
+	noteget wmp6, 36
+	noteget wmm6, 37
+	noteget wmp7, 38
+	noteget wmm7, 39
+
+	wmp1 = int(wmp1)
+	wmm1 = int(wmm1)
+	wmp2 = int(wmp2)
+	wmm2 = int(wmm2)
+	wmp3 = int(wmp3)
+	wmm3 = int(wmm3)
+	wmp4 = int(wmp4)
+	wmm4 = int(wmm4)
+	wmp5 = int(wmp5)
+	wmm5 = int(wmm5)
+	wmp6 = int(wmp6)
+	wmm6 = int(wmm6)
+	wmp7 = int(wmp7)
+	wmm7 = int(wmm7)
+
+	// 鎧
+	noteget wmp8, 40
+	noteget wmm8, 41
+	noteget wmp9, 42
+	noteget wmm9, 43
+	noteget wmp10, 44
+	noteget wmm10, 45
+	noteget wmp11, 46
+	noteget wmm11, 47
+	noteget wmp12, 48
+	noteget wmm12, 49
+	noteget wmp13, 50
+	noteget wmm13, 51
+	noteget wmp14, 52
+	noteget wmm14, 53
+
+	wmp8 = int(wmp8)
+	wmm8 = int(wmm8)
+	wmp9 = int(wmp9)
+	wmm9 = int(wmm9)
+	wmp10 = int(wmp10)
+	wmm10 = int(wmm10)
+	wmp11 = int(wmp11)
+	wmm11 = int(wmm11)
+	wmp12 = int(wmp12)
+	wmm12 = int(wmm12)
+	wmp13 = int(wmp13)
+	wmm13 = int(wmm13)
+	wmp14 = int(wmp14)
+	wmm14 = int(wmm14)
+
+	// serum
+	noteget wmp15, 54
+	noteget wmm15, 55
+	noteget wmp16, 56
+	noteget wmm16, 57
+	noteget wmp17, 58
+	noteget wmm17, 59
+	noteget wmp18, 60
+	noteget wmm18, 61
+	noteget wmp19, 62
+	noteget wmm19, 63
+	noteget wmp20, 64
+	noteget wmm20, 65
+
+	wmp15 = int(wmp15)
+	wmm15 = int(wmm15)
+	wmp16 = int(wmp16)
+	wmm16 = int(wmm16)
+	wmp17 = int(wmp17)
+	wmm17 = int(wmm17)
+	wmp18 = int(wmp18)
+	wmm18 = int(wmm18)
+	wmp19 = int(wmp19)
+	wmm19 = int(wmm19)
+	wmp20 = int(wmp20)
+	wmm20 = int(wmm20)
+
+
+
+
+
+
+
+
+
 
 	return
 
@@ -394,22 +1018,66 @@ goto *main
 	noteadd ""+c9, 11, 1
 	noteadd ""+c10, 12, 1
 	noteadd ""+c11, 13, 1
-	noteadd ""+c12, 14, 1
 
-	noteadd ""+cc1, 15, 1
-	noteadd ""+cc2, 16, 1
-	noteadd ""+cc3, 17, 1
-	noteadd ""+cc4, 18, 1
-	noteadd ""+cc5, 19, 1
-	noteadd ""+cc6, 20, 1
-	noteadd ""+cc7, 21, 1
-	noteadd ""+cc8, 22, 1
-	noteadd ""+cc9, 23, 1
-	noteadd ""+cc10, 24, 1
-	noteadd ""+cc11, 25, 1
-	noteadd ""+cc12, 26, 1
+	noteadd ""+cc1, 14, 1
+	noteadd ""+cc2, 15, 1
+	noteadd ""+cc3, 16, 1
+	noteadd ""+cc4, 17, 1
+	noteadd ""+cc5, 18, 1
+	noteadd ""+cc6, 19, 1
+	noteadd ""+cc7, 20, 1
+	noteadd ""+cc8, 21, 1
+	noteadd ""+cc9, 22, 1
+	noteadd ""+cc10, 23, 1
+	noteadd ""+cc11, 24, 1
 
-	noteadd ""+ichi_kioku, 27,1
+	noteadd ""+ichi_kioku, 25,1
+
+	// 武器
+	noteadd ""+wmp1, 26, 1
+	noteadd ""+wmm1, 27, 1
+	noteadd ""+wmp2, 28, 1
+	noteadd ""+wmm2, 29, 1
+	noteadd ""+wmp3, 30, 1
+	noteadd ""+wmm3, 31, 1
+	noteadd ""+wmp4, 32, 1
+	noteadd ""+wmm4, 33, 1
+	noteadd ""+wmp5, 34, 1
+	noteadd ""+wmm5, 35, 1
+	noteadd ""+wmp6, 36, 1
+	noteadd ""+wmm6, 37, 1
+	noteadd ""+wmp7, 38, 1
+	noteadd ""+wmm7, 39, 1
+
+	// 鎧
+	noteadd ""+wmp8, 40, 1
+	noteadd ""+wmm8, 41, 1
+	noteadd ""+wmp9, 42, 1
+	noteadd ""+wmm9, 43, 1
+	noteadd ""+wmp10, 44, 1
+	noteadd ""+wmm10, 45, 1
+	noteadd ""+wmp11, 46, 1
+	noteadd ""+wmm11, 47, 1
+	noteadd ""+wmp12, 48, 1
+	noteadd ""+wmm12, 49, 1
+	noteadd ""+wmp13, 50, 1
+	noteadd ""+wmm13, 51, 1
+	noteadd ""+wmp14, 52, 1
+	noteadd ""+wmm14, 53, 1
+
+	// serum
+	noteadd ""+wmp15, 54, 1
+	noteadd ""+wmm15, 55, 1
+	noteadd ""+wmp16, 56, 1
+	noteadd ""+wmm16, 57, 1
+	noteadd ""+wmp17, 58, 1
+	noteadd ""+wmm17, 59, 1
+	noteadd ""+wmp18, 60, 1
+	noteadd ""+wmm18, 61, 1
+	noteadd ""+wmp19, 62, 1
+	noteadd ""+wmm19, 63, 1
+	noteadd ""+wmp20, 64, 1
+	noteadd ""+wmm20, 65, 1
 
 	//	データを書き出す
 	notesave "config.ini"
