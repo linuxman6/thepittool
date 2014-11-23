@@ -1,0 +1,419 @@
+
+
+gosub *syokika		//変数初期化
+gosub *s_load		// 設定読み込み
+gosub *window_ichi	// 窓位置設定
+goto *main
+
+
+
+// ウィンドウのサイズと位置
+*window_ichi
+	// screenx = 0
+	// screeny = 0
+
+
+	if ichi_kioku = 1 : goto *ichi_f
+	if ichi_kioku = 0 : goto *ichi_nf
+
+
+*ichi_f
+	screen 0, 155, 330, , screenx, screeny
+	return
+
+
+*ichi_nf
+	screen 0, 155, 330, , 0, 0
+	return 
+
+
+	stop
+
+
+
+
+// 変数初期化
+*syokika
+	c1=0
+	c2=0
+	c3=0
+	c4=0
+	c5=0
+	c6=0
+	c7=0
+	c8=0
+	c9=0
+	c10=0
+	c11=0
+	c12=0
+
+	cc1=0
+	cc2=0
+	cc3=0
+	cc4=0
+	cc5=0
+	cc6=0
+	cc7=0
+	cc8=0
+	cc9=0
+	cc10=0
+	cc11=0
+	cc12=0
+
+	return
+
+
+
+
+
+
+
+
+// ----------------------------------------
+
+
+*main
+	cls
+	syscolor 15:boxf	// オブジェクトの表面色で背景を塗りつぶす
+	color 0,0,0
+
+//	title The Pit Trap Support Tool
+	title ""
+// タイトルバーの×ボタン
+	onexit goto *quit
+
+	pos 8,8
+	objsize 80,24
+	chkbox "HP減少" , c1
+	chkbox "HP回復" , c2
+	chkbox "速度2倍" , c3
+	chkbox "速度1/2" , c4
+	chkbox "盲目" , c5
+	chkbox "テレポート" , c6
+	chkbox "アイテム破壊" , c7
+	chkbox "充電" , c8
+	font msgothic, 12
+	mes "---- MG ----"
+	chkbox "全快" , c10
+	chkbox "Madness" , c11
+	chkbox "Psi回復" , c12
+
+
+	// ボタン
+
+	mes "" // 改行代わり
+	objsize 43,24
+
+	button "Reset", *reset
+
+	pos 56, ginfo_cy-24
+	button "Config", *config
+
+	pos 105, ginfo_cy-24
+	button "Quit", *quit
+
+
+//	pos 90, ginfo_cy-24
+//	button "Save", *save
+
+
+
+	// 不明色
+	objsize 
+	pos 90, 15
+	font msgothic, 12
+	mes "不明色"
+
+	boxpos1 = 90
+	boxpos2 = 35
+	boxpos3 = 105
+	boxpos4 = 50
+
+	//黒
+	boxf boxpos1, boxpos2, boxpos3, boxpos4
+
+	//白
+	boxpos2 = boxpos2 + 25
+	boxpos4 = boxpos4 + 25
+	color 255, 255, 255
+	boxf boxpos1, boxpos2, boxpos3, boxpos4
+
+	//白の黒枠
+	color 0, 0, 0
+	line  90, 60, 90, 75
+	line  89, 60, 105, 60
+	line  106, 75, 90, 75
+	line  105, 60, 105, 75
+
+	//赤
+	boxpos2 = boxpos2 + 25
+	boxpos4 = boxpos4 + 25
+	color 255, 0, 0
+	boxf boxpos1, boxpos2, boxpos3, boxpos4
+
+	//緑
+	boxpos2 = boxpos2 + 25
+	boxpos4 = boxpos4 + 25
+	color 0, 255, 0
+	boxf boxpos1, boxpos2, boxpos3, boxpos4
+
+	//オレンジ
+	boxpos2 = boxpos2 + 25
+	boxpos4 = boxpos4 + 25
+	color 255, 128, 0
+	boxf boxpos1, boxpos2, boxpos3, boxpos4
+
+	//黄色
+	boxpos2 = boxpos2 + 25
+	boxpos4 = boxpos4 + 25
+	color 255, 255, 0
+	boxf boxpos1, boxpos2, boxpos3, boxpos4
+
+
+	boxpos_c1 = 130
+	boxpos_c2 = 32
+
+	pos boxpos_c1, boxpos_c2
+	chkbox  "", cc1
+
+	boxpos_c2 = boxpos_c2 + 25
+	pos boxpos_c1, boxpos_c2
+	chkbox  "", cc2
+
+	boxpos_c2 = boxpos_c2 + 25
+	pos boxpos_c1, boxpos_c2
+	chkbox  "", cc3
+
+	boxpos_c2 = boxpos_c2 + 25
+	pos boxpos_c1, boxpos_c2
+	chkbox  "", cc4
+
+	boxpos_c2 = boxpos_c2 + 25
+	pos boxpos_c1, boxpos_c2
+	chkbox  "", cc5
+
+	boxpos_c2 = boxpos_c2 + 25
+	pos boxpos_c1, boxpos_c2
+	chkbox  "", cc6
+
+	stop
+
+
+
+
+// リセットボタン
+*reset
+	c1=0
+	c2=0
+	c3=0
+	c4=0
+	c5=0
+	c6=0
+	c7=0
+	c8=0
+	c9=0
+	c10=0
+	c11=0
+	c12=0
+
+	cc1=0
+	cc2=0
+	cc3=0
+	cc4=0
+	cc5=0
+	cc6=0
+	cc7=0
+	cc8=0
+	cc9=0
+	cc10=0
+	cc11=0
+	cc12=0
+
+	goto *main
+
+
+
+
+// ----------------------------------------
+
+*config
+	gsel 0, -1	// メインウィンドウ消去
+
+	screen 1, 135, 160
+	gsel 1, 2	// 設定ウィンドウを前画面へ
+	cls
+	syscolor 15:boxf	// オブジェクトの表面色で背景を塗りつぶす
+	color 0,0,0
+
+//	title The Pit Trap Support Tool
+	title ""
+	// タイトルバーの×ボタン
+	onexit goto *config_ok
+
+//	zenmen = 0
+
+	pos 8,8
+	objsize 120,24
+	chkbox "常に前画面に表示" , zenmen
+	chkbox "終了時の位置を記憶" , ichi_kioku
+
+	mes ""
+	mes "        Ver 0.2"
+	mes "     @linuxman6"
+
+
+	mes ""
+	pos 25,
+	objsize 80,24
+	button "OK", *config_ok
+
+	stop
+
+
+
+*config_ok
+	gsel 1, -1	// 設定ウィンドウ消去
+//	gsel 0, 2	// メインウィンドウ表示
+
+	if 0 = zenmen : goto *zenmen_off
+	if 1 = zenmen : goto *zenmen_on
+
+*zenmen_on
+	gsel 0, 2
+	goto *main
+
+*zenmen_off
+	gsel 0, 1
+	goto *main
+
+
+
+
+// ----------------------------------------
+//　設定読込
+
+*s_load
+	notesel loadmem
+	noteload "config.ini",
+
+	//前面表示
+	noteget zenmen, 0
+	zenmen = int(zenmen)
+
+	// ウィンドウ位置
+	noteget screenx, 1
+	noteget screeny, 2
+	screenx = int(screenx)
+	screeny = int(screeny)
+
+	// ウィンドウ位置の復元
+	noteget ichi_kioku, 27
+	ichi_kioku = int(ichi_kioku)
+
+	// トラップ
+	noteget c1, 3
+	noteget c2, 4
+	noteget c3, 5
+	noteget c4, 6
+	noteget c5, 7
+	noteget c6, 8
+	noteget c7, 9
+	noteget c8, 10
+	noteget c9, 11
+	noteget c10, 12
+	noteget c11, 13
+	noteget c12, 14
+
+	c1 = int(c1)
+	c2 = int(c2)
+	c3 = int(c3)
+	c4 = int(c4)
+	c5 = int(c5)
+	c6 = int(c6)
+	c7 = int(c7)
+	c8 = int(c8)
+	c9 = int(c9)
+	c10 = int(c10)
+	c11 = int(c11)
+	c12 = int(c12)
+
+	// 謎色
+	noteget cc1, 14
+	noteget cc2, 15
+	noteget cc3, 16
+	noteget cc4, 17
+	noteget cc5, 18
+	noteget cc6, 19
+	noteget cc7, 20
+	noteget cc8, 21
+	noteget cc9, 22
+	noteget cc10, 23
+	noteget cc11, 24
+
+	cc1 = int(cc1)
+	cc2 = int(cc2)
+	cc3 = int(cc3)
+	cc4 = int(cc4)
+	cc5 = int(cc5)
+	cc6 = int(cc6)
+	cc7 = int(cc7)
+	cc8 = int(cc8)
+	cc9 = int(cc9)
+	cc10 = int(cc10)
+	cc11 = int(cc11)
+
+	return
+
+
+// ----------------------------------------
+
+// 終了
+*quit
+	// セーブ
+	// note初期化
+	notesel savemem
+
+	// ウィンドウ位置
+	screenx = ginfo_wx1
+	screeny = ginfo_wy1
+
+	// 前画面
+	noteadd ""+zenmen, 0, 1
+
+	noteadd ""+screenx, 1, 1
+	noteadd ""+screeny, 2, 1
+
+	noteadd ""+c1, 3, 1
+	noteadd ""+c2, 4, 1
+	noteadd ""+c3, 5, 1
+	noteadd ""+c4, 6, 1
+	noteadd ""+c5, 7, 1
+	noteadd ""+c6, 8, 1
+	noteadd ""+c7, 9, 1
+	noteadd ""+c8, 10, 1
+	noteadd ""+c9, 11, 1
+	noteadd ""+c10, 12, 1
+	noteadd ""+c11, 13, 1
+	noteadd ""+c12, 14, 1
+
+	noteadd ""+cc1, 15, 1
+	noteadd ""+cc2, 16, 1
+	noteadd ""+cc3, 17, 1
+	noteadd ""+cc4, 18, 1
+	noteadd ""+cc5, 19, 1
+	noteadd ""+cc6, 20, 1
+	noteadd ""+cc7, 21, 1
+	noteadd ""+cc8, 22, 1
+	noteadd ""+cc9, 23, 1
+	noteadd ""+cc10, 24, 1
+	noteadd ""+cc11, 25, 1
+	noteadd ""+cc12, 26, 1
+
+	noteadd ""+ichi_kioku, 27,1
+
+	//	データを書き出す
+	notesave "config.ini"
+
+	end
+
+
