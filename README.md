@@ -47,4 +47,5 @@ README.rmをきちんと書いた
 
 ======================================================================  
 by Linuxman（りなくす）  
+clearorzhm@gmail.com  
 [https://twitter.com/linuxman6](https://twitter.com/linuxman6)
