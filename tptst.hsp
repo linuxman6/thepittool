@@ -154,6 +154,7 @@ goto *main
 	boxpos4 = boxpos4 + haba
 	boxf boxpos1, boxpos2, boxpos3, boxpos4	
 
+
 	//â©êF
 	boxpos_waku1 = boxpos1 + 1
 	boxpos_waku2 = boxpos2 + 1
@@ -190,7 +191,6 @@ goto *main
 	color 255, 128, 0
 	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
 
-
 	//çïòg
 	color 0, 0, 0
 	boxpos2 = boxpos2 + haba
@@ -204,8 +204,6 @@ goto *main
 	boxpos_waku4 = boxpos4 - 1
 	color 255, 0, 0
 	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
-
-
 
 	//çïòg
 	color 0, 0, 0
@@ -221,41 +219,34 @@ goto *main
 	color 128, 0, 128
 	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
 
-
-	//çï
+	//çïòg
 	color 0, 0, 0
 	boxpos2 = boxpos2 + haba
 	boxpos4 = boxpos4 + haba
 	boxf boxpos1, boxpos2, boxpos3, boxpos4
 
+	//ê¬
+	boxpos_waku1 = boxpos1 + 1
+	boxpos_waku2 = boxpos2 + 1
+	boxpos_waku3 = boxpos3 - 1
+	boxpos_waku4 = boxpos4 - 1
+	color 0, 0, 255
+	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
 
-//	//çïòg
-//	color 0, 0, 0
-//	boxpos2 = boxpos2 + haba
-//	boxpos4 = boxpos4 + haba
-//	boxf boxpos1, boxpos2, boxpos3, boxpos4	
+	//çïòg
+	color 0, 0, 0
+	boxpos2 = boxpos2 + haba
+	boxpos4 = boxpos4 + haba
+	boxf boxpos1, boxpos2, boxpos3, boxpos4	
 
-	//
-//	boxpos_waku1 = boxpos1 + 1
-//	boxpos_waku2 = boxpos2 + 1
-//	boxpos_waku3 = boxpos3 - 1
-//	boxpos_waku4 = boxpos4 - 1
-//	color 255, 255, 255
-//	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
+	//çï
+	boxpos_waku1 = boxpos1 + 1
+	boxpos_waku2 = boxpos2 + 1
+	boxpos_waku3 = boxpos3 - 1
+	boxpos_waku4 = boxpos4 - 1
+	color 0, 0, 0
+	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
 
-//	//çïòg
-//	color 0, 0, 0
-//	boxpos2 = boxpos2 + haba
-//	boxpos4 = boxpos4 + haba
-//	boxf boxpos1, boxpos2, boxpos3, boxpos4	
-
-	//
-//	boxpos_waku1 = boxpos1 + 1
-//	boxpos_waku2 = boxpos2 + 1
-//	boxpos_waku3 = boxpos3 - 1
-//	boxpos_waku4 = boxpos4 - 1
-//	color 255, 255, 255
-//	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
 
 //	//çïòg
 //	color 0, 0, 0
@@ -324,11 +315,13 @@ goto *main
 	pos boxpos_c1, boxpos_c2
 	chkbox  "", cc7
 
-//	boxpos_c2 = boxpos_c2 + haba
+	boxpos_c2 = boxpos_c2 + haba
 	pos boxpos_c1, boxpos_c2
 	chkbox  "", cc8
 
-//	boxpos_c2 = boxpos_c2 + haba
+	//ï\é¶ÇíºÇ∑ÇΩÇﬂÇ…âÊñ äOÇ…ï\é¶
+	boxpos_c2 = boxpos_c2 + haba
+	boxpos_c1 = boxpos_c1 + 50
 	pos boxpos_c1, boxpos_c2
 	chkbox  "", cc9
 
@@ -787,7 +780,7 @@ goto *main
 	chkbox "èIóπéûÇÃà íuÇãLâØ" , ichi_kioku
 
 	mes ""
-	mes "        Ver 0.5"
+	mes "        Ver 0.6"
 	mes "     @linuxman6"
 
 
