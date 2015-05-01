@@ -21,6 +21,7 @@ goto *main
 	c9=0
 	c10=0
 	c11=0
+	c12=0
 
 	cc1=0
 	cc2=0
@@ -41,11 +42,11 @@ goto *main
 *window_ichi
 
 	if ichi_kioku = 0 {
-						screen 0, 155, 330, , 0, 0
+						screen 0, 155, 345, , 0, 0
 						return
 	}
 	else {
-						screen 0, 155, 330, , screenx, screeny
+						screen 0, 155, 345, , screenx, screeny
 						return
 	}
 
@@ -97,14 +98,16 @@ goto *main
 	mes "---- MG ----"
 	chkbox "全快" , c9
 	chkbox "Madness" , c10
-	chkbox "Psi回復" , c11
+	chkbox "Psi減少" , c11
+	chkbox "Psi回復" , c12
 
 
 	// ボタン
 
-	mes "" // 改行代わり
+//	mes "" // 改行代わり
 	objsize 43,24
 
+	pos , ginfo_cy+5
 	button "Reset", *reset
 
 	pos 56, ginfo_cy-24
@@ -148,6 +151,7 @@ goto *main
 	color 255, 255, 255
 	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
 
+//-
 	//黒枠
 	color 0, 0, 0
 	boxpos2 = boxpos2 + haba
@@ -163,6 +167,7 @@ goto *main
 	color 255, 255, 0
 	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
 
+//-
 	//黒枠
 	color 0, 0, 0
 	boxpos2 = boxpos2 + haba
@@ -177,6 +182,7 @@ goto *main
 	color 0, 255, 0
 	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
 
+//-
 	//黒枠
 	color 0, 0, 0
 	boxpos2 = boxpos2 + haba
@@ -191,6 +197,7 @@ goto *main
 	color 255, 128, 0
 	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
 
+//-
 	//黒枠
 	color 0, 0, 0
 	boxpos2 = boxpos2 + haba
@@ -205,6 +212,22 @@ goto *main
 	color 255, 0, 0
 	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
 
+//-
+	//黒枠
+	color 0, 0, 0
+	boxpos2 = boxpos2 + haba
+	boxpos4 = boxpos4 + haba
+	boxf boxpos1, boxpos2, boxpos3, boxpos4	
+
+	//ピンク
+	boxpos_waku1 = boxpos1 + 1
+	boxpos_waku2 = boxpos2 + 1
+	boxpos_waku3 = boxpos3 - 1
+	boxpos_waku4 = boxpos4 - 1
+	color 255, 105, 180
+	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
+
+//-
 	//黒枠
 	color 0, 0, 0
 	boxpos2 = boxpos2 + haba
@@ -216,9 +239,10 @@ goto *main
 	boxpos_waku2 = boxpos2 + 1
 	boxpos_waku3 = boxpos3 - 1
 	boxpos_waku4 = boxpos4 - 1
-	color 128, 0, 128
+	color 153, 0, 204
 	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
 
+//-
 	//黒枠
 	color 0, 0, 0
 	boxpos2 = boxpos2 + haba
@@ -233,6 +257,7 @@ goto *main
 	color 0, 0, 255
 	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
 
+//-
 	//黒枠
 	color 0, 0, 0
 	boxpos2 = boxpos2 + haba
@@ -248,7 +273,7 @@ goto *main
 	boxf boxpos_waku1, boxpos_waku2, boxpos_waku3, boxpos_waku4
 
 
-//	//黒枠
+	//黒枠
 //	color 0, 0, 0
 //	boxpos2 = boxpos2 + haba
 //	boxpos4 = boxpos4 + haba
@@ -319,16 +344,17 @@ goto *main
 	pos boxpos_c1, boxpos_c2
 	chkbox  "", cc8
 
-	//表示を直すために画面外に表示
 	boxpos_c2 = boxpos_c2 + haba
-	boxpos_c1 = boxpos_c1 + 50
 	pos boxpos_c1, boxpos_c2
 	chkbox  "", cc9
 
-//	boxpos_c2 = boxpos_c2 + haba
+
+	boxpos_c2 = boxpos_c2 + haba
+	boxpos_c1 = boxpos_c1 + 50	
 	pos boxpos_c1, boxpos_c2
 	chkbox  "", cc10
 
+//	表示を直すために画面外に表示
 //	boxpos_c2 = boxpos_c2 + haba
 	pos boxpos_c1, boxpos_c2
 	chkbox  "", cc11
@@ -690,6 +716,7 @@ goto *main
 	c9=0
 	c10=0
 	c11=0
+	c12=0
 
 	cc1=0
 	cc2=0
@@ -780,7 +807,7 @@ goto *main
 	chkbox "終了時の位置を記憶" , ichi_kioku
 
 	mes ""
-	mes "        Ver 0.6"
+	mes "        Ver 0.7"
 	mes "     @linuxman6"
 
 
@@ -842,6 +869,7 @@ goto *main
 	noteget c9, 11
 	noteget c10, 12
 	noteget c11, 13
+	noteget c12, 66
 
 	c1 = int(c1)
 	c2 = int(c2)
@@ -854,8 +882,8 @@ goto *main
 	c9 = int(c9)
 	c10 = int(c10)
 	c11 = int(c11)
-
-
+	c12 = int(c12)
+	
 	// 謎色
 	noteget cc1, 14
 	noteget cc2, 15
@@ -1071,6 +1099,9 @@ goto *main
 	noteadd ""+wmm19, 63, 1
 	noteadd ""+wmp20, 64, 1
 	noteadd ""+wmm20, 65, 1
+
+	//　トラップ追加分
+	noteadd ""+c12, 66, 1
 
 	//	データを書き出す
 	notesave "config.ini"
