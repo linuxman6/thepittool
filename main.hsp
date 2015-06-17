@@ -1,0 +1,107 @@
+
+
+
+
+
+	sdim doortrap, 16, 16			; ドアトラップ用変数
+		doortrap.0 = "HP減少"
+		doortrap.1 = "HP回復"
+		doortrap.2 = "速度2倍"
+		doortrap.3 = "速度1/2"
+		doortrap.4 = "盲目"
+		doortrap.5 = "テレポート"
+		doortrap.6 = "アイテム破壊"
+		doortrap.7 = "充電"
+		doortrap.8 = "---MG---"
+		doortrap.9 = "全快"
+		doortrap.10 = "Madness"
+		doortrap.11 = "Psi減少"
+		doortrap.12 = "Psi回復"
+
+
+	dim doorcolor1, 16, 16			;ドア未鑑定色1
+		doorlolor1.0 = 255			;白
+		doorlolor1.1 = 255			;黄
+		doorlolor1.2 = 255			;緑
+		doorlolor1.3 = 255			;オレンジ
+		doorlolor1.4 = 255			;赤
+		doorlolor1.5 = 255			;ピンク
+		doorlolor1.6 = 153			;紫
+		doorlolor1.7 = 0			;青
+		doorlolor1.8 = 0		;黒
+
+	dim doorcolor2, 16, 16			;ドア未鑑定色2
+		doorlolor2.0 = 255
+		doorlolor2.1 = 255
+		doorlolor2.2 = 255
+		doorlolor2.3 = 128
+		doorlolor2.4 = 0
+		doorlolor2.5 = 105
+		doorlolor2.6 = 0
+		doorlolor2.7 = 0
+		doorlolor2.8 = 0
+
+	dim doorcolor3, 16, 16			;ドア未鑑定色3
+		doorlolor3.0 = 255
+		doorlolor3.1 = 0
+		doorlolor3.2 = 255
+		doorlolor3.3 = 0
+		doorlolor3.4 = 0
+		doorlolor3.5 = 180
+		doorlolor3.6 = 204
+		doorlolor3.7 = 255
+		doorlolor3.8 = 0
+
+
+
+
+; 左側
+
+	objsize 80,
+	
+	kuri_door = 1			; ドアトラップ表示
+*doortrap_loop
+	if 8 > kuri_door {
+		chkbox ""+doortrap.kuri_door, doortrap_chkbox.kuri_door
+		kuri_door = kuri_door+1
+		goto *doortrap_loop
+	}
+
+
+	mes ""+doortrap.8			; MG区切り
+
+
+	kuri_door = kuri_door+1			; ドアトラップ表示　MG
+*doortrap_loop_mg
+	if 13 > kuri_door {
+		chkbox ""+doortrap.kuri_door, doortrap_chkbox.kuri_door
+		kuri_door = kuri_door+1
+		goto *doortrap_loop_mg
+	}
+
+
+; 右側
+
+	pos 80, 0
+
+	
+
+
+
+
+
+
+
+	stop
+
+
+
+
+
+
+
+
+
+
+
+
