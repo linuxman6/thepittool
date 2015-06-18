@@ -58,7 +58,8 @@
 ; 左側
 
 	objsize 80,
-	
+	pos 4,
+
 	kuri_door = 1			; ドアトラップ表示
 *doortrap_loop
 	if 8 > kuri_door {
@@ -84,10 +85,18 @@
 
 	pos 80, 0
 
-	
+	color 0, 0, 0
+	boxf 80, 3, 95, 18
+
+	color doorlolor1.0, doorlolor2.0, doorlolor3.0
+	boxf 81, 4, 94, 17
 
 
+	color 0, 0, 0
+	boxf 80, 28, 95, 43
 
+	color doorlolor1.1, doorlolor2.1, doorlolor3.1
+	boxf 81, 29, 94, 42
 
 
 
