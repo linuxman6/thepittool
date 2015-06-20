@@ -3,54 +3,57 @@
 
 
 
-	sdim doortrap, 16, 16			; ドアトラップ用変数
-		doortrap.0 = "HP減少"
-		doortrap.1 = "HP回復"
-		doortrap.2 = "速度2倍"
-		doortrap.3 = "速度1/2"
-		doortrap.4 = "盲目"
-		doortrap.5 = "テレポート"
-		doortrap.6 = "アイテム破壊"
-		doortrap.7 = "充電"
-		doortrap.8 = "---MG---"
-		doortrap.9 = "全快"
-		doortrap.10 = "Madness"
-		doortrap.11 = "Psi減少"
-		doortrap.12 = "Psi回復"
+	sdim doortrap, 16, 12			; ドアトラップ用変数
+			doortrap.0 = "HP減少"
+			doortrap.1 = "HP回復"
+			doortrap.2 = "速度2倍"
+			doortrap.3 = "速度1/2"
+			doortrap.4 = "盲目"
+			doortrap.5 = "テレポート"
+			doortrap.6 = "アイテム破壊"
+			doortrap.7 = "充電"
+			doortrap.8 = "---MG---"
+			doortrap.9 = "全快"
+			doortrap.10 = "Madness"
+			doortrap.11 = "Psi減少"
+			doortrap.12 = "Psi回復"
 
 
-	dim doorcolor1, 16, 16			;ドア未鑑定色1
-		doorlolor1.0 = 255			;白
-		doorlolor1.1 = 255			;黄
-		doorlolor1.2 = 255			;緑
-		doorlolor1.3 = 255			;オレンジ
-		doorlolor1.4 = 255			;赤
-		doorlolor1.5 = 255			;ピンク
-		doorlolor1.6 = 153			;紫
-		doorlolor1.7 = 0			;青
-		doorlolor1.8 = 0		;黒
+	dim doorcolor, 3, 16			;ドア未鑑定色1
+			doorcolor(0,0) = 255		;白
+			doorlolor(0,1) = 255		;黄
+			doorcolor(0,2) = 0			;緑
+			doorcolor(0,3) = 255		;オレンジ
+			doorcolor(0,4) = 255		;赤
+			doorcolor(0,5) = 255		;ピンク
+			doorcolor(0,6) = 153		;紫
+			doorcolor(0,7) = 0			;青
+			doorcolor(0,8) = 0			;黒
 
-	dim doorcolor2, 16, 16			;ドア未鑑定色2
-		doorlolor2.0 = 255
-		doorlolor2.1 = 255
-		doorlolor2.2 = 255
-		doorlolor2.3 = 128
-		doorlolor2.4 = 0
-		doorlolor2.5 = 105
-		doorlolor2.6 = 0
-		doorlolor2.7 = 0
-		doorlolor2.8 = 0
+									;ドア未鑑定色2
+			doorcolor(1,0) = 255
+			doorcolor(1,1) = 255
+			doorcolor(1,2) = 255
+			doorcolor(1,3) = 128
+			doorcolor(1,4) = 0
+			doorcolor(1,5) = 105
+			doorcolor(1,6) = 0
+			doorcolor(1,7) = 0
+			doorcolor(1,8) = 0
 
-	dim doorcolor3, 16, 16			;ドア未鑑定色3
-		doorlolor3.0 = 255
-		doorlolor3.1 = 0
-		doorlolor3.2 = 255
-		doorlolor3.3 = 0
-		doorlolor3.4 = 0
-		doorlolor3.5 = 180
-		doorlolor3.6 = 204
-		doorlolor3.7 = 255
-		doorlolor3.8 = 0
+									;ドア未鑑定色3
+			doorcolor(2,0) = 255
+			doorcolor(2,1) = 0
+			doorcolor(2,2) = 255
+			doorcolor(2,3) = 0
+			doorcolor(2,4) = 0
+			doorcolor(2,5) = 180
+			doorcolor(2,6) = 204
+			doorcolor(2,7) = 255
+			doorcolor(2,8) = 0
+
+
+
 
 
 
@@ -60,10 +63,12 @@
 	objsize 80,
 	pos 4,
 
+	dim doortrap_chkbox, 16
+
 	kuri_door = 1			; ドアトラップ表示
 *doortrap_loop
 	if 8 > kuri_door {
-		chkbox ""+doortrap.kuri_door, doortrap_chkbox.kuri_door
+		chkbox ""+doortrap.kuri_door, doortrap_chkbox(kuri_door)
 		kuri_door = kuri_door+1
 		goto *doortrap_loop
 	}
@@ -81,23 +86,44 @@
 	}
 
 
+
 ; 右側
 
-	pos 80, 0
+	dim sikaku, 16
+		sikaku(0) = 85			; 黒枠初期値
+		sikaku(1) = 3
+		sikaku(2) = 100
+		sikaku(3) = 18
 
-	color 0, 0, 0
-	boxf 80, 3, 95, 18
-
-	color doorlolor1.0, doorlolor2.0, doorlolor3.0
-	boxf 81, 4, 94, 17
+	dim	doorcolor_chkbox, 16
 
 
-	color 0, 0, 0
-	boxf 80, 28, 95, 43
+	sikaku_kazu = 0
+*mikantei_door
+	if 9 > sikaku_kazu : {
+		color 0, 0, 0			; 黒枠色
+		boxf sikaku(0), sikaku(1), sikaku(2), sikaku(3)			;黒枠
 
-	color doorlolor1.1, doorlolor2.1, doorlolor3.1
-	boxf 81, 29, 94, 42
+		;色四角
+		color doorcolor(0,sikaku_kazu), doorcolor(1,sikaku_kazu), doorcolor(2,sikaku_kazu)
+		boxf sikaku(0) + 1, sikaku(1) + 1, sikaku(2) - 1, sikaku(3) - 1
 
+		;チェックボックス
+		pos sikaku(0) + 30 , sikaku(1) -3
+		chkbox "", doorcolor_chkbox(sikaku_kazu)
+
+
+		sikaku(1) = sikaku(1) + 25			;枠移動
+		sikaku(3) = sikaku(3) + 25
+
+
+		sikaku_kazu = sikaku_kazu + 1
+		goto *mikantei_door
+	}
+
+//	表示を直すために画面外に表示
+		pos sikaku(0) + 60 , sikaku(1) -3
+		chkbox "", doorcolor_chkbox(sikaku_kazu)
 
 
 

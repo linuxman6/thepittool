@@ -1,6 +1,6 @@
 
 
-	screen 0, 200, 350
+	screen 0, 135, 350
 	title "tptst"
 	syscolor 15:boxf			;”wŒi‚ğƒOƒŒ[‚É“h‚è‚Â‚Ô‚µ
 	color 0,0,0			;•¶šF‚ğ•
