@@ -1,20 +1,31 @@
 
 
-	screen 0, 135, 350
-	title "tptst"
-	syscolor 15:boxf			;”wŒi‚ğƒOƒŒ[‚É“h‚è‚Â‚Ô‚µ
-	color 0,0,0			;•¶šF‚ğ•
-
 
 
 ; ----------
 
 
 
-	#include "ini_save.hsp"
-	#include "ini_load.hsp"
+
+
+
+
+
+
+*main
 	#include "main.hsp"
+
+;*config
 	#include "config.hsp"
+
+;*save
+	#include "ini_save.hsp"
+
+;*load
+	#include "ini_load.hsp"
+
+
+
 
 
 

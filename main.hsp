@@ -3,20 +3,39 @@
 
 
 
+
+
+
+
+
+	cls
+	screen 0, 135, 330
+	title "tptst"
+	
+	syscolor 15
+	boxf			;背景をグレーに塗りつぶし
+	
+	color 0,0,0			;文字色を黒
+
+
+
+
+
+
 	sdim doortrap, 16, 12			; ドアトラップ用変数
-			doortrap.0 = "HP減少"
-			doortrap.1 = "HP回復"
-			doortrap.2 = "速度2倍"
-			doortrap.3 = "速度1/2"
-			doortrap.4 = "盲目"
-			doortrap.5 = "テレポート"
-			doortrap.6 = "アイテム破壊"
-			doortrap.7 = "充電"
-			doortrap.8 = "---MG---"
-			doortrap.9 = "全快"
-			doortrap.10 = "Madness"
-			doortrap.11 = "Psi減少"
-			doortrap.12 = "Psi回復"
+			doortrap(0) = "HP減少"
+			doortrap(1) = "HP回復"
+			doortrap(2) = "速度2倍"
+			doortrap(3) = "速度1/2"
+			doortrap(4) = "盲目"
+			doortrap(5) = "テレポート"
+			doortrap(6) = "アイテム破壊"
+			doortrap(7) = "充電"
+			doortrap(8) = "---MG---"
+			doortrap(9) = "全快"
+			doortrap(10) = "Madness"
+			doortrap(11) = "Psi減少"
+			doortrap(12) = "Psi回復"
 
 
 	dim doorcolor, 3, 16			;ドア未鑑定色1
@@ -68,22 +87,27 @@
 	kuri_door = 1			; ドアトラップ表示
 *doortrap_loop
 	if 8 > kuri_door {
-		chkbox ""+doortrap.kuri_door, doortrap_chkbox(kuri_door)
-		kuri_door = kuri_door+1
+		chkbox ""+doortrap(kuri_door), doortrap_chkbox(kuri_door)
+		kuri_door ++
 		goto *doortrap_loop
 	}
 
 
-	mes ""+doortrap.8			; MG区切り
+	mes ""+doortrap(8)			; MG区切り
 
 
 	kuri_door = kuri_door+1			; ドアトラップ表示　MG
+
 *doortrap_loop_mg
 	if 13 > kuri_door {
-		chkbox ""+doortrap.kuri_door, doortrap_chkbox.kuri_door
-		kuri_door = kuri_door+1
+		chkbox ""+doortrap(kuri_door), doortrap_chkbox(kuri_door)
+		kuri_door ++
 		goto *doortrap_loop_mg
 	}
+
+
+	button_pos_x = ginfo_cx			; 下部ボタンのための座標取得
+	button_pos_y = ginfo_cy
 
 
 
@@ -117,7 +141,7 @@
 		sikaku(3) = sikaku(3) + 25
 
 
-		sikaku_kazu = sikaku_kazu + 1
+		sikaku_kazu ++
 		goto *mikantei_door
 	}
 
@@ -127,10 +151,56 @@
 
 
 
-	stop
+
+
+; 下部ボタン
+
+	pos button_pos_x + 1, button_pos_y
+	mes ""
+
+	objsize 60,			; リセットボタン
+	button "Reset", *reset
+
+
+	pos button_pos_x + 67 , button_pos_y
+	mes ""
+	button "Config", *reset
 
 
 
+; デバッグ用
+screen 1,
+
+	abc = 0
+*debug
+	if 13 > abc : {
+		mes doortrap_chkbox(abc)
+		abc = abc + 1
+		goto *debug
+	}
+
+
+stop
+
+
+
+*reset
+; doortrap_chkbox(0-12)
+; doorcolor_chkbox(0-7)
+	
+	reset_roop = 0			; トラップチェックボックスリセット
+	if 13 > reset_roop : {
+		doortrap_chkbox(reset_roop) = 0
+		reset_roop ++
+	}
+
+	reset_roop = 0			; 未鑑定色チェックボックスリセット
+	if 8 > reset_roop : {
+		doorcolor_chkbox(reset_roop) = 0
+		reset_roop ++
+	}
+
+	goto *main
 
 
 
