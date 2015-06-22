@@ -10,6 +10,7 @@
 
 	cls
 	screen 0, 135, 330
+	gsel 0, zenmen
 	title "tptst"
 	
 	syscolor 15
@@ -17,12 +18,13 @@
 	
 	color 0,0,0			;文字色を黒
 
+	onexit *save
 
 
 
 
 
-	sdim doortrap, 16, 12			; ドアトラップ用変数
+; ドアトラップ用変数
 			doortrap(0) = "HP減少"
 			doortrap(1) = "HP回復"
 			doortrap(2) = "速度2倍"
@@ -38,7 +40,7 @@
 			doortrap(12) = "Psi回復"
 
 
-	dim doorcolor, 3, 16			;ドア未鑑定色1
+;ドア未鑑定色1
 			doorcolor(0,0) = 255		;白
 			doorlolor(0,1) = 255		;黄
 			doorcolor(0,2) = 0			;緑
@@ -49,7 +51,7 @@
 			doorcolor(0,7) = 0			;青
 			doorcolor(0,8) = 0			;黒
 
-									;ドア未鑑定色2
+;ドア未鑑定色2
 			doorcolor(1,0) = 255
 			doorcolor(1,1) = 255
 			doorcolor(1,2) = 255
@@ -60,7 +62,7 @@
 			doorcolor(1,7) = 0
 			doorcolor(1,8) = 0
 
-									;ドア未鑑定色3
+;ドア未鑑定色3
 			doorcolor(2,0) = 255
 			doorcolor(2,1) = 0
 			doorcolor(2,2) = 255
@@ -82,7 +84,7 @@
 	objsize 80,
 	pos 4,
 
-	dim doortrap_chkbox, 16
+
 
 	kuri_door = 1			; ドアトラップ表示
 *doortrap_loop
@@ -113,13 +115,13 @@
 
 ; 右側
 
-	dim sikaku, 16
+
 		sikaku(0) = 85			; 黒枠初期値
 		sikaku(1) = 3
 		sikaku(2) = 100
 		sikaku(3) = 18
 
-	dim	doorcolor_chkbox, 16
+
 
 
 	sikaku_kazu = 0
@@ -146,7 +148,7 @@
 	}
 
 //	表示を直すために画面外に表示
-		pos sikaku(0) + 60 , sikaku(1) -3
+		pos sikaku(0) + 80 , sikaku(1) -3
 		chkbox "", doorcolor_chkbox(sikaku_kazu)
 
 
@@ -164,20 +166,20 @@
 
 	pos button_pos_x + 67 , button_pos_y
 	mes ""
-	button "Config", *reset
+	button "Config", *config			; 設定ボタン
 
 
 
 ; デバッグ用
-screen 1,
+;screen 10,
 
-	abc = 0
-*debug
-	if 13 > abc : {
-		mes doortrap_chkbox(abc)
-		abc = abc + 1
-		goto *debug
-	}
+;	abc = 0
+;*debug
+;	if 13 > abc : {
+;		mes doortrap_chkbox(abc)
+;		abc = abc + 1
+;		goto *debug
+;	}
 
 
 stop
@@ -185,20 +187,12 @@ stop
 
 
 *reset
-; doortrap_chkbox(0-12)
-; doorcolor_chkbox(0-7)
-	
-	reset_roop = 0			; トラップチェックボックスリセット
-	if 13 > reset_roop : {
-		doortrap_chkbox(reset_roop) = 0
-		reset_roop ++
-	}
+	; 左側
+	dim doortrap_chkbox, 16			; ドアトラップ
 
-	reset_roop = 0			; 未鑑定色チェックボックスリセット
-	if 8 > reset_roop : {
-		doorcolor_chkbox(reset_roop) = 0
-		reset_roop ++
-	}
+	; 右側
+	dim	doorcolor_chkbox, 16		; チェックボックス
+
 
 	goto *main
 

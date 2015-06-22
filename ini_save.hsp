@@ -4,12 +4,58 @@
 
 ; doortrap_chkbox(0-12)
 ; doorcolor_chkbox(0-7)
+; zenmen
+; window_ichi
+; window_x
+; window_y
+
+
+	notesel savedata			; 保存用note変数に savedata を設定
+
+
+; -----
+; 設定
+
+	noteadd ""+zenmen, 0, 1		; 前面表示
+	noteadd ""+window_ichi, 1, 1	; 窓位置の復元
+
+	window_x = ginfo(4)			; ウィンドウの座標 x
+	window_y = ginfo(5)			; ウィンドウの座標 y
+	noteadd ""+window_x, 2, 1
+	noteadd ""+window_y, 3, 1
+
+	; 10まで予備
+	save_temp = 4
+	while 10 > save_temp
+		noteadd "0", save_temp, 1
+		save_temp ++
+	wend
+
+
+; -----
+; チェックボックス
+
+	; トラップ
+	save_temp_chk = 0
+	while 23 > save_temp
+		noteadd ""+doortrap_chkbox(save_temp_chk), save_temp, 1
+		save_temp ++
+		save_temp_chk ++
+	wend
+
+
+	; 不明色
+	save_temp_chk = 0
+	while 32 > save_temp
+		noteadd ""+doorcolor_chkbox(save_temp_chk), save_temp, 1
+		save_temp ++
+		save_temp_chk ++
+	wend
 
 
 
-
-
-
+; -----
+	notesave "config.ini"		; config.iniに savedata を保存
 
 
 

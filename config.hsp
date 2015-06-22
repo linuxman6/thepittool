@@ -1,0 +1,55 @@
+
+
+	window_x = ginfo(4)			; ウィンドウの座標 x
+	window_y = ginfo(5)			; ウィンドウの座標 y
+
+
+	gsel 0, -1			; メインウィンドウを非表示
+
+	cls
+	screen 1, 135, 180, , window_x, window_y
+	gsel 1, 2			; 最前面表示
+	title "tptst - 設定"
+	
+	syscolor 15
+	boxf			;背景をグレーに塗りつぶし
+	
+	color 0,0,0			;文字色を黒
+
+	onexit *config_ok			; クローズボックスを押した時の処理
+
+
+
+	pos 4,
+	objsize 120,
+	mes ""
+	chkbox "終了時の位置を記憶", window_ichi
+	chkbox "常に最前面に表示", zenmen_chk
+	mes ""
+	mes "Ver.test"
+	mes "@linuxman6"
+	mes ""
+
+	pos 8,
+	button "OK", *config_ok
+
+	stop
+
+
+
+
+*config_ok
+
+	if zenmen_chk > 0 : {			; 最前面表示がONならば数値を2にする
+		zenmen = 2
+	}
+	else {						; 0ならば数値を1にする
+		zenmen = 1
+	}
+
+
+	gsel 1, -1			; 設定ウィンドウを非表示
+	goto *main
+
+
+

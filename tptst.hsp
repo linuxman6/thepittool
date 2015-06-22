@@ -2,29 +2,53 @@
 
 
 
+
+	gosub *hensuu_reset
+
+
 ; ----------
-
-
-
-
-
-
 
 
 
 *main
 	#include "main.hsp"
 
-;*config
+*config
 	#include "config.hsp"
-
-;*save
-	#include "ini_save.hsp"
 
 ;*load
 	#include "ini_load.hsp"
 
+*save
+	#include "ini_save.hsp"
 
+end
+
+
+
+; ----------
+
+
+
+; 変数初期化
+*hensuu_reset
+	; main
+	sdim doortrap, 16, 12			; ドアトラップ用変数
+	dim doorcolor, 3, 16			;ドア未鑑定色1
+
+	; 左側
+	dim doortrap_chkbox, 16			; ドアトラップ
+
+	; 右側
+	dim sikaku, 16					; 黒枠
+	dim	doorcolor_chkbox, 16		; チェックボックス
+
+	zenmen = 0						; 最前面表示
+
+	sdim savedata, 16, 32			; 設定セーブ用メモリノート用変数
+
+
+	return
 
 
 
