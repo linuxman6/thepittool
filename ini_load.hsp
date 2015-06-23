@@ -16,7 +16,7 @@
 	;設定を文字列から整数系へ変換
 	sdim load_loop_temp
 	load_loop = 0
-	while 33 > load_loop
+	while 34 > load_loop
 		noteget load_loop_temp, load_loop
 		savedata_dim(load_loop) = int(load_loop_temp)
 		load_loop ++
@@ -35,29 +35,44 @@
 
 
 
-return
+	if zenmen = 2 : {					; 全面表示のチェックボックス切り替え
+		zenmen_chk = 1
+	}
+	else {
+		zenmen_chk = 0
+	}
+
+	if window_ichi = 0 : {				;窓位置の復元が0なら窓位置を0,0
+		window_x = 0
+		window_y = 0
+	}
+
+
 
 ; -----
 ; チェックボックス
 
 	; トラップ
 	load_temp_chk = 0
-	while 22 > load_temp
+	load_temp = 10
+	while 23 > load_temp
 		doortrap_chkbox(load_temp_chk) = savedata_dim(load_temp)
 		load_temp ++
 		load_temp_chk ++
 	wend
 
 
+
+
 	; 不明色
 	load_temp_chk = 0
-	while 33 > load_temp
+	while 34 > load_temp
 		doorcolor_chkbox(load_temp_chk) = savedata_dim(load_temp)
 		load_temp ++
 		load_temp_chk ++
 	wend
 
-
+	return
 
 ; -----
 

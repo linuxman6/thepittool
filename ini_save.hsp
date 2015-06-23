@@ -24,7 +24,7 @@
 	noteadd ""+window_x, 2, 1
 	noteadd ""+window_y, 3, 1
 
-	; 10まで予備
+	; 9まで予備
 	save_temp = 4
 	while 10 > save_temp
 		noteadd "0", save_temp, 1
@@ -32,16 +32,16 @@
 	wend
 
 ; -----
-	notesave "config.ini"		; config.iniに savedata を保存
 
-end
+
+
 
 
 ; -----
 ; チェックボックス
 
-	; トラップ
-	save_temp_chk = 11
+	; トラップ 12個
+	save_temp_chk = 0
 	while 23 > save_temp
 		noteadd ""+doortrap_chkbox(save_temp_chk), save_temp, 1
 		save_temp ++
@@ -49,14 +49,13 @@ end
 	wend
 
 
-	; 不明色
+	; 不明色 10色
 	save_temp_chk = 0
-	while 32 > save_temp
+	while 33 > save_temp
 		noteadd ""+doorcolor_chkbox(save_temp_chk), save_temp, 1
 		save_temp ++
 		save_temp_chk ++
 	wend
-
 
 
 ; -----

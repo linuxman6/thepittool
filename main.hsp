@@ -9,7 +9,7 @@
 
 
 	cls
-	screen 0, 135, 330, , window_x, window_y
+	screen 0, 135, 340, , window_x, window_y
 	gsel 0, zenmen
 	title "tptst"
 	
@@ -50,6 +50,7 @@
 			doorcolor(0,6) = 153		;紫
 			doorcolor(0,7) = 0			;青
 			doorcolor(0,8) = 0			;黒
+			doorcolor(0,9) = 192		;グレー
 
 ;ドア未鑑定色2
 			doorcolor(1,0) = 255
@@ -61,6 +62,7 @@
 			doorcolor(1,6) = 0
 			doorcolor(1,7) = 0
 			doorcolor(1,8) = 0
+			doorcolor(1,9) = 192
 
 ;ドア未鑑定色3
 			doorcolor(2,0) = 255
@@ -72,7 +74,7 @@
 			doorcolor(2,6) = 204
 			doorcolor(2,7) = 255
 			doorcolor(2,8) = 0
-
+			doorcolor(2,9) = 192
 
 
 
@@ -86,27 +88,25 @@
 
 
 
-	kuri_door = 1			; ドアトラップ表示
-*doortrap_loop
-	if 8 > kuri_door {
+	kuri_door = 0			; ドアトラップ表示
+	while 8 > kuri_door
 		chkbox ""+doortrap(kuri_door), doortrap_chkbox(kuri_door)
 		kuri_door ++
-		goto *doortrap_loop
-	}
+	wend
 
 
 	mes ""+doortrap(8)			; MG区切り
 
 
-	kuri_door ++			; ドアトラップ表示　MG
-	doortrap_chkbox(kuri_door + 10) = 0
+	; ドアトラップ表示　MG
+	doortrap_chkbox(kuri_door) = 8
+	kuri_door ++	
 
-*doortrap_loop_mg
-	if 13 > kuri_door {
+
+	while 13 > kuri_door
 		chkbox ""+doortrap(kuri_door), doortrap_chkbox(kuri_door)
 		kuri_door ++
-		goto *doortrap_loop_mg
-	}
+	wend
 
 
 	button_pos_x = ginfo_cx			; 下部ボタンのための座標取得
@@ -127,7 +127,7 @@
 
 	sikaku_kazu = 0
 *mikantei_door
-	if 9 > sikaku_kazu : {
+	if 10 > sikaku_kazu : {
 		color 0, 0, 0			; 黒枠色
 		boxf sikaku(0), sikaku(1), sikaku(2), sikaku(3)			;黒枠
 
@@ -158,15 +158,15 @@
 
 ; 下部ボタン
 
-	pos button_pos_x + 1, button_pos_y
-	mes ""
+	pos button_pos_x + 1, button_pos_y + 5
+	;mes ""
 
 	objsize 60,			; リセットボタン
 	button "Reset", *reset
 
 
-	pos button_pos_x + 67 , button_pos_y
-	mes ""
+	pos button_pos_x + 67 , button_pos_y + 5
+	;mes ""
 	button "Config", *config			; 設定ボタン
 
 

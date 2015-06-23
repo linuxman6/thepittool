@@ -48,9 +48,9 @@ end
 
 	zenmen = 0						; 最前面表示
 
-	sdim savedata, 16, 32			; 設定セーブ用メモリノート用変数
-	dim savedata_dim, 16, 32		; ロードした設定を整数系にする変数
-	dim savedata_dim, 32			; ロードした設定を整数系に変数した変数
+	sdim savedata, 16, 64			; 設定セーブ用メモリノート用変数
+	dim savedata_dim, 16, 64		; ロードした設定を整数系にする変数
+	dim savedata_dim, 64			; ロードした設定を整数系に変数した変数
 
 	return
 
