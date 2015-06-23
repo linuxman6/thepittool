@@ -4,7 +4,7 @@
 【バージョン】 0.08 
 【開発言語　】 HSP 3.5 beta 1  
 【公開開始日】 2015/06/23  
-【配布File　】 TPTST007.zip  
+【配布File　】 TPTST008.zip  
 【開発環境　】 Windows 8.1 64bit  
 【ライセンス】 NYSL Version 0.9982  
 
