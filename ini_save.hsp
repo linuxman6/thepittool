@@ -31,12 +31,17 @@
 		save_temp ++
 	wend
 
+; -----
+	notesave "config.ini"		; config.iniに savedata を保存
+
+end
+
 
 ; -----
 ; チェックボックス
 
 	; トラップ
-	save_temp_chk = 0
+	save_temp_chk = 11
 	while 23 > save_temp
 		noteadd ""+doortrap_chkbox(save_temp_chk), save_temp, 1
 		save_temp ++

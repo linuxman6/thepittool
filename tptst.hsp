@@ -4,7 +4,7 @@
 
 
 	gosub *hensuu_reset
-
+	gosub *load
 
 ; ----------
 
@@ -16,7 +16,7 @@
 *config
 	#include "config.hsp"
 
-;*load
+*load
 	#include "ini_load.hsp"
 
 *save
@@ -36,6 +36,9 @@ end
 	sdim doortrap, 16, 12			; ドアトラップ用変数
 	dim doorcolor, 3, 16			;ドア未鑑定色1
 
+	dim window_x
+	dim window_y
+
 	; 左側
 	dim doortrap_chkbox, 16			; ドアトラップ
 
@@ -46,7 +49,8 @@ end
 	zenmen = 0						; 最前面表示
 
 	sdim savedata, 16, 32			; 設定セーブ用メモリノート用変数
-
+	dim savedata_dim, 16, 32		; ロードした設定を整数系にする変数
+	dim savedata_dim, 32			; ロードした設定を整数系に変数した変数
 
 	return
 

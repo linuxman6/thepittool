@@ -9,7 +9,7 @@
 
 
 	cls
-	screen 0, 135, 330
+	screen 0, 135, 330, , window_x, window_y
 	gsel 0, zenmen
 	title "tptst"
 	
@@ -98,7 +98,8 @@
 	mes ""+doortrap(8)			; MG区切り
 
 
-	kuri_door = kuri_door+1			; ドアトラップ表示　MG
+	kuri_door ++			; ドアトラップ表示　MG
+	doortrap_chkbox(kuri_door + 10) = 0
 
 *doortrap_loop_mg
 	if 13 > kuri_door {

@@ -1,0 +1,67 @@
+
+
+; doortrap_chkbox(0-12)
+; doorcolor_chkbox(0-7)
+; zenmen
+; window_ichi
+; window_x
+; window_y
+
+
+
+	notesel savedata			; 設定用note変数に savedata を設定
+
+	noteload "config.ini"		; config.iniに savedata を保存
+
+	;設定を文字列から整数系へ変換
+	sdim load_loop_temp
+	load_loop = 0
+	while 33 > load_loop
+		noteget load_loop_temp, load_loop
+		savedata_dim(load_loop) = int(load_loop_temp)
+		load_loop ++
+	wend
+
+
+
+; -----
+; 設定
+
+	zenmen = savedata_dim(0)			; 前面表示
+	window_ichi = savedata_dim(1)		; 窓位置の復元
+
+	window_x = savedata_dim(2)			; ウィンドウの座標 x
+	window_y = savedata_dim(3)			; ウィンドウの座標 y
+
+
+
+return
+
+; -----
+; チェックボックス
+
+	; トラップ
+	load_temp_chk = 0
+	while 22 > load_temp
+		doortrap_chkbox(load_temp_chk) = savedata_dim(load_temp)
+		load_temp ++
+		load_temp_chk ++
+	wend
+
+
+	; 不明色
+	load_temp_chk = 0
+	while 33 > load_temp
+		doorcolor_chkbox(load_temp_chk) = savedata_dim(load_temp)
+		load_temp ++
+		load_temp_chk ++
+	wend
+
+
+
+; -----
+
+
+	return
+
+
