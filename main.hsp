@@ -194,6 +194,10 @@ stop
 	; 右側
 	dim	doorcolor_chkbox, 16		; チェックボックス
 
+	; 現在のウィンドウ位置
+	window_x = ginfo(4)			; ウィンドウの座標 x
+	window_y = ginfo(5)			; ウィンドウの座標 y
+
 
 	goto *main
 
