@@ -16,11 +16,17 @@
 *config
 	#include "config.hsp"
 
+*view
+	#include "view.hsp"
+
 *load
 	#include "ini_load.hsp"
 
 *save
 	#include "ini_save.hsp"
+
+
+
 
 end
 

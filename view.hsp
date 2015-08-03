@@ -1,0 +1,63 @@
+
+
+	gsel 0, -1			; メインウィンドウを非表示
+
+	cls
+	screen 2, 220, 550
+	gsel 2, 2			; 最前面表示
+	title "tptst - view"
+
+
+	syscolor 15
+	boxf			;背景をグレーに塗りつぶし
+	
+	color 0,0,0			;文字色を黒
+
+	onexit *view_end			; クローズボックスを押した時の処理
+
+
+
+	font "メイリオ",26,
+	pos 16,16
+
+
+
+	kuri_door = 0			; ドアトラップ表示
+	while 8 > kuri_door
+			if 1 = doortrap_chkbox(kuri_door) : {
+				mes "○"+doortrap(kuri_door)
+			}
+			else{
+				mes "×"+doortrap(kuri_door)
+			}
+		kuri_door ++
+	wend
+
+
+	mes ""+doortrap(8)			; MG区切り
+
+
+	; ドアトラップ表示　MG
+	doortrap_chkbox(kuri_door) = 8
+	kuri_door ++	
+
+
+	while 13 > kuri_door
+			if 1 = doortrap_chkbox(kuri_door) : {
+				mes "○"+doortrap(kuri_door)
+			}
+			else{
+				mes "×"+doortrap(kuri_door)
+			}
+		kuri_door ++
+	wend
+
+
+
+stop
+
+
+*view_end
+	gsel 2, -1
+	goto *main
+

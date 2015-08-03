@@ -9,7 +9,7 @@
 
 
 	cls
-	screen 0, 135, 340, , window_x, window_y
+	screen 0, 160, 345, , window_x, window_y
 	gsel 0, zenmen
 	title "tptst"
 	
@@ -42,7 +42,7 @@
 
 ;ドア未鑑定色1
 			doorcolor(0,0) = 255		;白
-			doorlolor(0,1) = 255		;黄
+			doorcolor(0,1) = 255		;黄
 			doorcolor(0,2) = 0			;緑
 			doorcolor(0,3) = 255		;オレンジ
 			doorcolor(0,4) = 255		;赤
@@ -67,7 +67,7 @@
 ;ドア未鑑定色3
 			doorcolor(2,0) = 255
 			doorcolor(2,1) = 0
-			doorcolor(2,2) = 255
+			doorcolor(2,2) = 0
 			doorcolor(2,3) = 0
 			doorcolor(2,4) = 0
 			doorcolor(2,5) = 180
@@ -84,9 +84,9 @@
 ; 左側
 
 	objsize 80,
-	pos 4,
+	pos 8, 4
 
-
+	font "メイリオ",
 
 	kuri_door = 0			; ドアトラップ表示
 	while 8 > kuri_door
@@ -117,10 +117,10 @@
 ; 右側
 
 
-		sikaku(0) = 85			; 黒枠初期値
-		sikaku(1) = 3
-		sikaku(2) = 100
-		sikaku(3) = 18
+		sikaku(0) = 90			; 黒枠初期値
+		sikaku(1) = 7
+		sikaku(2) = 105
+		sikaku(3) = 22
 
 
 
@@ -136,7 +136,7 @@
 		boxf sikaku(0) + 1, sikaku(1) + 1, sikaku(2) - 1, sikaku(3) - 1
 
 		;チェックボックス
-		pos sikaku(0) + 30 , sikaku(1) -3
+		pos sikaku(0) + 45 , sikaku(1) -3
 		chkbox "", doorcolor_chkbox(sikaku_kazu)
 
 
@@ -149,8 +149,8 @@
 	}
 
 //	表示を直すために画面外に表示
-		pos sikaku(0) + 80 , sikaku(1) -3
-		chkbox "", doorcolor_chkbox(sikaku_kazu)
+//		pos sikaku(0) + 80 , sikaku(1) -3
+//		chkbox "", doorcolor_chkbox(sikaku_kazu)
 
 
 
@@ -158,17 +158,21 @@
 
 ; 下部ボタン
 
-	pos button_pos_x + 1, button_pos_y + 5
+	pos button_pos_x + 0, button_pos_y + 5
 	;mes ""
 
-	objsize 60,			; リセットボタン
+	objsize 55,			; リセットボタン
 	button "Reset", *reset
 
 
-	pos button_pos_x + 67 , button_pos_y + 5
+	pos button_pos_x + 60 , button_pos_y + 5
 	;mes ""
 	button "Config", *config			; 設定ボタン
 
+	pos button_pos_x + 120 , button_pos_y + 5
+	;mes ""
+	objsize 32,
+	button "V", *view			; 設定ボタン
 
 
 ; デバッグ用
