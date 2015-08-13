@@ -25,10 +25,10 @@
 	kuri_door = 0			; ÉhÉAÉgÉâÉbÉvï\é¶
 	while 8 > kuri_door
 			if 1 = doortrap_chkbox(kuri_door) : {
-				mes "Åõ"+doortrap(kuri_door)
+				mes "Åõ "+doortrap(kuri_door)
 			}
 			else{
-				mes "Å~"+doortrap(kuri_door)
+				mes "Å~ "+doortrap(kuri_door)
 			}
 		kuri_door ++
 	wend
@@ -44,10 +44,10 @@
 
 	while 13 > kuri_door
 			if 1 = doortrap_chkbox(kuri_door) : {
-				mes "Åõ"+doortrap(kuri_door)
+				mes "Åõ "+doortrap(kuri_door)
 			}
 			else{
-				mes "Å~"+doortrap(kuri_door)
+				mes "Å~ "+doortrap(kuri_door)
 			}
 		kuri_door ++
 	wend
